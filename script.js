@@ -26,11 +26,21 @@ input.addEventListener('click', function (event) {
             return;
         }
     }
-    else if(inputPin.value.length == 4){
+    else if (inputPin.value.length == 4) {
         return;
     }
     else {
         inputPin.value += inputNumber;
+    }
+});
+
+
+// enter key event handler
+document.getElementById('inputPin').addEventListener("keydown", function (event) {
+    console.log(event.key);
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submitBtn").click();
     }
 });
 
@@ -58,19 +68,19 @@ function pinMatch() {
 
 // pin checker function
 function pinChecker(rightAlert, wrongAlert) {
-    display(rightAlert,'block');
-    display(wrongAlert,'none');
+    display(rightAlert, 'block');
+    display(wrongAlert, 'none');
 }
 
 
 // action handler function
 function callAction() {
     if (actionLeft.innerText == 0) {
-        display('submitBtn','none')
-        display('waiting','block');
+        display('submitBtn', 'none')
+        display('waiting', 'block');
         setTimeout(function () {
-            display('submitBtn','inline-block')
-            display('waiting','none');
+            display('submitBtn', 'inline-block')
+            display('waiting', 'none');
             actionLeft.innerText = 5;
         }, 10000);
         return;
