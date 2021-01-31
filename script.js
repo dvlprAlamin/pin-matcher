@@ -11,7 +11,7 @@ function randomPin() {
 }
 
 
-// input button event handler
+// input buttons event handler
 let input = document.getElementById('buttons');
 input.addEventListener('click', function (event) {
     let inputNumber = event.target.innerText;
@@ -38,11 +38,15 @@ function pinMatch() {
     let inputPin = parseInt(document.getElementById('inputPin').value);
     let actionLeft = document.getElementById('actionLeft');
     if (randomPin == inputPin) {
-        pinChecker('rightAlert', 'wrongAlert','none')
+        pinChecker('rightAlert', 'wrongAlert');
+        display('action', 'none');
+        document.getElementById('inputPin').value = '';
         actionLeft.innerText = 5;
     }
     else {
-        pinChecker('wrongAlert', 'rightAlert', 'block')
+        pinChecker('wrongAlert', 'rightAlert');
+        display('action', 'block');
+        document.getElementById('inputPin').value = '';
         actionLeft.innerText--;
         callAction();
     }
@@ -50,11 +54,13 @@ function pinMatch() {
 
 
 // pin checker function
-function pinChecker(rightAlert, wrongAlert, actionLeft) {
+function pinChecker(rightAlert, wrongAlert) {
     display(rightAlert,'block');
     display(wrongAlert,'none');
-    display('action',actionLeft);
 }
+
+
+// action handler function
 function callAction() {
     if (actionLeft.innerText == 0) {
         display('submitBtn','none')
