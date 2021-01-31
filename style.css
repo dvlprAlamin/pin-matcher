@@ -108,3 +108,9 @@ color: #E0B612;
 #action{
     display: none;
 }
+.pin-field{
+    background-color: #444444 !important;
+    font-size: 2rem !important;
+    color: #a8e3f5 !important;
+    outline: 0;
+}
