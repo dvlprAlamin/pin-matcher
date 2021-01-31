@@ -26,6 +26,9 @@ input.addEventListener('click', function (event) {
             return;
         }
     }
+    else if(inputPin.value.length == 4){
+        return;
+    }
     else {
         inputPin.value += inputNumber;
     }

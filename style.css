@@ -114,6 +114,7 @@ color: #E0B612;
     font-size: 2rem !important;
     color: #a8e3f5 !important;
     outline: 0;
+    text-align: center;
 }
 #waiting{
     color: #ffffff;
