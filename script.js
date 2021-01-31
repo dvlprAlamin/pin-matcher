@@ -32,7 +32,7 @@ input.addEventListener('click', function (event) {
 });
 
 
-
+// pin match function
 function pinMatch() {
     let randomPin = parseInt(document.getElementById('generatedPin').value);
     let inputPin = parseInt(document.getElementById('inputPin').value);
@@ -44,46 +44,32 @@ function pinMatch() {
     else {
         pinChecker('wrongAlert', 'rightAlert', 'block')
         actionLeft.innerText--;
-        // if (actionLeft.innerText == 0) {
-        //     let submit = document.getElementById('submitBtn');
-        //     // submit.disabled = true;
-        //     submit.style.display = 'none'
-        //     document.getElementById('action').innerText = 'Wait for 15 seconds';
-        //     setTimeout(function () {
-        //         // submit.disabled = false;
-        //         submit.style.display = 'inline-block';
-        //         actionLeft.innerText = 5;
-        //         document.getElementById('action').innerText = actionLeft.innerText +' '+ 'try left';
-        //     }, 5000);
-        //     return;
-        // }
         callAction();
     }
 }
+
+
+// pin checker function
 function pinChecker(rightAlert, wrongAlert, actionLeft) {
     display(rightAlert,'block');
     display(wrongAlert,'none');
     display('action',actionLeft);
-    // document.getElementById(rightAlert).style.display = "block";
-    // document.getElementById(wrongAlert).style.display = "none";
-    // document.getElementById('action').style.display = actionLeft;
 }
 function callAction() {
     if (actionLeft.innerText == 0) {
-        let submit = document.getElementById('submitBtn');
-        // submit.disabled = true;
-        submit.style.display = 'none';
+        display('submitBtn','none')
         display('waiting','block');
         setTimeout(function () {
-            // submit.disabled = false;
-            submit.style.display = 'inline-block';
+            display('submitBtn','inline-block')
             display('waiting','none');
             actionLeft.innerText = 5;
-        }, 5000);
+        }, 10000);
         return;
     }
 }
 
-function display(id, display) {
-    document.getElementById(id).style.display = display;
+
+// display element function
+function display(id, condition) {
+    document.getElementById(id).style.display = condition;
 }
