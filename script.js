@@ -1,5 +1,5 @@
 // pin generate function
-function randomPin() {
+const randomPin = () => {
     let generatedPin = (Math.random() * 10000 + '').split('.')[0];
     let randomPin = document.getElementById('generatedPin');
     if (generatedPin.length < 4) {
@@ -46,7 +46,7 @@ document.getElementById('inputPin').addEventListener("keydown", function (event)
 
 
 // pin match function
-function pinMatch() {
+const pinMatch = () => {
     let randomPin = parseInt(document.getElementById('generatedPin').value);
     let inputPin = parseInt(document.getElementById('inputPin').value);
     let actionLeft = document.getElementById('actionLeft');
@@ -72,18 +72,20 @@ function pinChecker(rightAlert, wrongAlert) {
     display(wrongAlert, 'none');
 }
 
-
+const waitingTime = document.getElementById('waiting-time');
 // action handler function
-function callAction() {
+const callAction = () => {
     if (actionLeft.innerText == 0) {
         display('submitBtn', 'none')
         display('waiting', 'block');
-        setTimeout(function () {
+        setTimeout(() => {
             display('submitBtn', 'inline-block')
             display('waiting', 'none');
             actionLeft.innerText = 5;
+            clearInterval(interval);
+            waitingTime.innerText = 10;
         }, 10000);
-        return;
+        const interval = setInterval(() => waitingTime.innerText--, 1000);
     }
 }
 
