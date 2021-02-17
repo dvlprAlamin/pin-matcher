@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="pinGenerate()">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -44,7 +44,7 @@
                             <div>
                                 <button onclick="pinMatch()" type="submit" id="submitBtn" class="submit-btn">Submit</button>
                                 <p class="action-left" id="action"><span id="actionLeft">5</span> try left</p>
-                                <p id="waiting">Wait for <span id="waiting-time">10</span> seconds</p>
+                                <p id="waiting" class="d-none">Wait for <span id="waiting-time">10</span> seconds</p>
                             </div>
                     </div>
                 </div>

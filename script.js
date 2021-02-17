@@ -1,6 +1,5 @@
-const inputPin = document.getElementById('inputPin');
-const randomPin = document.getElementById('generatedPin');
 // pin generate function
+const randomPin = document.getElementById('generatedPin');
 const pinGenerate = () => {
     let generatedPin = (Math.random() * 10000 + '').split('.')[0];
     generatedPin.length < 4 ? pinGenerate() : randomPin.value = generatedPin;
@@ -8,67 +7,50 @@ const pinGenerate = () => {
 
 
 // input buttons event handler
-let input = document.getElementById('buttons');
+const inputPin = document.getElementById('inputPin');
+const input = document.getElementById('buttons');
 input.addEventListener('click', function (event) {
     let inputNumber = event.target.innerText;
     if (isNaN(inputNumber)) {
-        if (inputNumber == "C") {
-            inputPin.value = '';
-        }
-        if (inputNumber == "Del") {
-            let afterDel = inputPin.value.slice(0, - 1);
-            inputPin.value = afterDel;
-            return;
-        }
+        inputNumber === "C" && (inputPin.value = '');
+        inputNumber === "Del" && (inputPin.value = inputPin.value.slice(0, - 1));
     }
-    else if (inputPin.value.length == 4) {
-        return;
-    }
-    else {
-        inputPin.value += inputNumber;
-    }
+    else if (inputPin.value.length === 4) return;
+    else inputPin.value += inputNumber;
 });
 
-const submitBtn = document.getElementById("submitBtn");
+
 // enter key event handler
+const submitBtn = document.getElementById("submitBtn");
 inputPin.addEventListener("keydown", (e) => e.key === "Enter" && submitBtn.click());
 
 
 // pin match function
+const action = document.getElementById('action');
+const actionLeft = document.getElementById('actionLeft');
 const pinMatch = () => {
-    let actionLeft = document.getElementById('actionLeft');
     if (randomPin.value === inputPin.value) {
-        
-        pinChecker('rightAlert', 'wrongAlert');
-        display('action', 'none');
-        inputPin.value = '';
+        alert('rightAlert');
+        action.style.display = 'none';
         actionLeft.innerText = 5;
     }
     else {
-        pinChecker('wrongAlert', 'rightAlert');
-        display('action', 'block');
-        inputPin.value = '';
+        alert('wrongAlert');
+        action.style.display = 'block';
         actionLeft.innerText--;
         callAction();
     }
+    inputPin.value = '';
 }
 
 
-// pin checker function
-function pinChecker(rightAlert, wrongAlert) {
-    display(rightAlert, 'block');
-    display(wrongAlert, 'none');
-}
-
-const waitingTime = document.getElementById('waiting-time');
 // action handler function
+const waitingTime = document.getElementById('waiting-time');
 const callAction = () => {
-    if (actionLeft.innerText == 0) {
-        display('submitBtn', 'none')
-        display('waiting', 'block');
+    if (actionLeft.innerText === '0') {
+        submitBtnToggler()
         setTimeout(() => {
-            display('submitBtn', 'inline-block')
-            display('waiting', 'none');
+            submitBtnToggler()
             actionLeft.innerText = 5;
             clearInterval(interval);
             waitingTime.innerText = 10;
@@ -77,12 +59,14 @@ const callAction = () => {
     }
 }
 
+// submit button & waiting time toggler
+const submitBtnToggler = () => {
+    document.getElementById('submitBtn').classList.toggle('d-none');
+    document.getElementById('waiting').classList.toggle('d-none')
+};
 
-// display element function
-function display(id, condition) {
-    document.getElementById(id).style.display = condition;
-}
-
-const toggler = () => {
-
-}
+// alert message handler
+const alert = id => {
+    document.getElementById(id).style.display = 'block';
+    setInterval(() => document.getElementById(id).style.display = 'none', 2000);
+};
