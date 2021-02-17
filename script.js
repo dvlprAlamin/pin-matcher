@@ -1,13 +1,9 @@
+const inputPin = document.getElementById('inputPin');
+const randomPin = document.getElementById('generatedPin');
 // pin generate function
-const randomPin = () => {
+const pinGenerate = () => {
     let generatedPin = (Math.random() * 10000 + '').split('.')[0];
-    let randomPin = document.getElementById('generatedPin');
-    if (generatedPin.length < 4) {
-        return randomPin();
-    }
-    else {
-        randomPin.value = generatedPin;
-    }
+    generatedPin.length < 4 ? pinGenerate() : randomPin.value = generatedPin;
 }
 
 
@@ -15,14 +11,13 @@ const randomPin = () => {
 let input = document.getElementById('buttons');
 input.addEventListener('click', function (event) {
     let inputNumber = event.target.innerText;
-    let inputPin = document.getElementById('inputPin');
     if (isNaN(inputNumber)) {
         if (inputNumber == "C") {
             inputPin.value = '';
         }
         if (inputNumber == "Del") {
-            let afterDel = document.getElementById('inputPin').value.slice(0, - 1);
-            document.getElementById('inputPin').value = afterDel;
+            let afterDel = inputPin.value.slice(0, - 1);
+            inputPin.value = afterDel;
             return;
         }
     }
@@ -34,32 +29,25 @@ input.addEventListener('click', function (event) {
     }
 });
 
-
+const submitBtn = document.getElementById("submitBtn");
 // enter key event handler
-document.getElementById('inputPin').addEventListener("keydown", function (event) {
-    console.log(event.key);
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("submitBtn").click();
-    }
-});
+inputPin.addEventListener("keydown", (e) => e.key === "Enter" && submitBtn.click());
 
 
 // pin match function
 const pinMatch = () => {
-    let randomPin = parseInt(document.getElementById('generatedPin').value);
-    let inputPin = parseInt(document.getElementById('inputPin').value);
     let actionLeft = document.getElementById('actionLeft');
-    if (randomPin == inputPin) {
+    if (randomPin.value === inputPin.value) {
+        
         pinChecker('rightAlert', 'wrongAlert');
         display('action', 'none');
-        document.getElementById('inputPin').value = '';
+        inputPin.value = '';
         actionLeft.innerText = 5;
     }
     else {
         pinChecker('wrongAlert', 'rightAlert');
         display('action', 'block');
-        document.getElementById('inputPin').value = '';
+        inputPin.value = '';
         actionLeft.innerText--;
         callAction();
     }
@@ -93,4 +81,8 @@ const callAction = () => {
 // display element function
 function display(id, condition) {
     document.getElementById(id).style.display = condition;
+}
+
+const toggler = () => {
+
 }
